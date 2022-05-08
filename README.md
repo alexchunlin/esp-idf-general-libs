@@ -1,101 +1,7 @@
 # ESP-IDF Components library
-
-[![Build Status](https://github.com/UncleRus/esp-idf-lib/workflows/Build%20examples/badge.svg)](https://github.com/UncleRus/esp-idf-lib/actions?query=workflow%3A%22Build+examples%22)
-[![Build the documentation](https://github.com/UncleRus/esp-idf-lib/workflows/Build%20the%20documentation/badge.svg)](https://github.com/UncleRus/esp-idf-lib/actions?query=workflow%3A%22Build+the+documentation%22)
-[![Docs Status](https://readthedocs.org/projects/esp-idf-lib/badge/?version=latest&style=flat)](https://esp-idf-lib.readthedocs.io/en/latest/)
-
-Components for Espressif ESP32 [ESP-IDF framework](https://github.com/espressif/esp-idf)
-and [ESP8266 RTOS SDK](https://github.com/espressif/ESP8266_RTOS_SDK).
-
-Part of them ported from [esp-open-rtos](https://github.com/SuperHouse/esp-open-rtos).
-
-## Supported versions of frameworks and devices
-
-| Chip           | Framework          | Versions
-|----------------|--------------------|-----------------------
-| ESP32          | ESP-IDF            | All officially supported versions (see [Support Period Policy](https://github.com/espressif/esp-idf/blob/master/SUPPORT_POLICY.md)) and `master`
-| ESP32-S2 *[1]* | ESP-IDF            | All officially supported versions and `master`
-| ESP32-C3 *[1]* | ESP-IDF            | All officially supported versions and `master`
-| ESP8266  *[2]* | ESP8266 RTOS SDK   | `master`, v3.4
-
-[1] *Use "`idf.py set-target esp32s2`" or "`idf.py set-target esp32c3`" before "`idf.py menuconfig`" to change
-the chip type.*
-
-[2] *Due to the incompatibility of ESP8266 drivers and hardware, some
-libraries are not* *supported on ESP8266 (see "ESP8266" column in the tables).*
-
-## How to use
-
-### ESP32
-
-Clone this repository somewhere, e.g.:
-
-```Shell
-cd ~/myprojects/esp
-git clone https://github.com/UncleRus/esp-idf-lib.git
-```
-
-Add path to components in your [project makefile](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system-legacy.html),
-e.g:
-
-```Makefile
-PROJECT_NAME := my-esp-project
-EXTRA_COMPONENT_DIRS := /home/user/myprojects/esp/esp-idf-lib/components
-include $(IDF_PATH)/make/project.mk
-```
-
-or in [CMakeLists.txt](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html):
-
-```CMake
-cmake_minimum_required(VERSION 3.5)
-set(EXTRA_COMPONENT_DIRS /home/user/myprojects/esp/esp-idf-lib/components)
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(my-esp-project)
-```
-
-or with CMake [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html)
-
-```CMake
-cmake_minimum_required(VERSION 3.11)
-include(FetchContent)
-FetchContent_Declare(
-  espidflib
-  GIT_REPOSITORY https://github.com/UncleRus/esp-idf-lib.git
-)
-FetchContent_MakeAvailable(espidflib)
-set(EXTRA_COMPONENT_DIRS ${espidflib_SOURCE_DIR}/components)
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(my-esp-project)
-```
-
-### ESP8266 RTOS SDK
-
-Clone this repository somewhere, e.g.:
-
-```Shell
-cd ~/myprojects/esp
-git clone https://github.com/UncleRus/esp-idf-lib.git
-```
-
-Add path to components in your [project makefile](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-guides/build-system.html),
-e.g:
-
-```Makefile
-PROJECT_NAME := my-esp-project
-EXTRA_COMPONENT_DIRS := /home/user/myprojects/esp/esp-idf-lib/components
-EXCLUDE_COMPONENTS := max7219 mcp23x17 led_strip max31865 ls7366r
-include $(IDF_PATH)/make/project.mk
-```
-
-See [GitHub examples](https://github.com/UncleRus/esp-idf-lib/tree/master/examples)
-or [GitLab examples](https://gitlab.com/UncleRus/esp-idf-lib/tree/master/examples).
-
-## Documentation
-
-- [Documentation](https://esp-idf-lib.readthedocs.io/en/latest/)
-- [Frequently asked questions](FAQ.md)
-
-## Components
+I want to use and add to this libary, but I've taken out some of the components I don't expect to ever use.  This will evolve as my needs for this library changes.
+In the mean time, feel free to use this collection of other people's code for your own needs if you've run across this repo!
+## Components!
 
 ### ADC/DAC libraries
 
@@ -106,16 +12,6 @@ or [GitLab examples](https://gitlab.com/UncleRus/esp-idf-lib/tree/master/example
 | **mcp342x**              | Driver for 18-Bit, delta-sigma ADC MCP3426/MCP3427/MCP3428                       | BSD-3   | `esp32`, `esp8266` | Yes
 | **mcp4725**              | Driver for 12-bit DAC MCP4725                                                    | BSD-3   | `esp32`, `esp8266` | Yes
 | **pcf8591**              | Driver for 8-bit ADC and an 8-bit DAC PCF8591                                    | BSD-3   | `esp32`, `esp8266` | Yes
-
-### Air quality sensors
-
-| Component                | Description                                                                      | License | Supported on       | Thread safety
-|--------------------------|----------------------------------------------------------------------------------|---------|--------------------|--------------
-| **ccs811**               | Driver for AMS CCS811 digital gas sensor                                         | BSD-3   | `esp32`, `esp8266` | Yes
-| **mhz19b**               | Driver for MH-Z19B NDIR CO₂ sensor                                               | BSD-3   | `esp32`, `esp8266` | No
-| **scd30**                | Driver for SCD30 CO₂ sensor                                                      | BSD-3   | `esp32`, `esp8266` | Yes
-| **scd4x**                | Driver for SCD40/SCD41 miniature CO₂ sensor                                      | BSD-3   | `esp32`, `esp8266` | Yes
-| **sgp40**                | Driver for SGP40 Indoor Air Quality Sensor for VOC Measurements                  | BSD-3   | `esp32`, `esp8266` | Yes
 
 ### Common libraries
 
@@ -147,28 +43,6 @@ or [GitLab examples](https://gitlab.com/UncleRus/esp-idf-lib/tree/master/example
 | **pcf8574**              | Driver for PCF8574 remote 8-bit I/O expander for I2C-bus                         | MIT     | `esp32`, `esp8266` | Yes
 | **pcf8575**              | Driver for PCF8575 remote 16-bit I/O expander for I2C-bus                        | MIT     | `esp32`, `esp8266` | Yes
 | **tca95x5**              | Driver for TCA9535/TCA9555 remote 16-bit I/O expanders for I2C-bus               | BSD-3   | `esp32`, `esp8266` | Yes
-
-### Gas sensors
-
-| Component                | Description                                                                      | License | Supported on       | Thread safety
-|--------------------------|----------------------------------------------------------------------------------|---------|--------------------|--------------
-| **ccs811**               | Driver for AMS CCS811 digital gas sensor                                         | BSD-3   | `esp32`, `esp8266` | Yes
-| **mhz19b**               | Driver for MH-Z19B NDIR CO₂ sensor                                               | BSD-3   | `esp32`, `esp8266` | No
-| **scd30**                | Driver for SCD30 CO₂ sensor                                                      | BSD-3   | `esp32`, `esp8266` | Yes
-| **scd4x**                | Driver for SCD40/SCD41 miniature CO₂ sensor                                      | BSD-3   | `esp32`, `esp8266` | Yes
-
-### Humidity sensors
-
-| Component                | Description                                                                      | License | Supported on       | Thread safety
-|--------------------------|----------------------------------------------------------------------------------|---------|--------------------|--------------
-| **aht**                  | Driver for AHT10/AHT15/AHT20 temperature and humidity sensor                     | BSD-3   | `esp32`, `esp8266` | Yes
-| **bme680**               | Driver for BME680 digital environmental sensor                                   | BSD-3   | `esp32`, `esp8266` | Yes
-| **dht**                  | Driver for DHT11, AM2301 (DHT21, DHT22, AM2302, AM2321), Itead Si7021            | BSD-3   | `esp32`, `esp8266` | No
-| **hdc1000**              | Driver for HDC1000 temperature and humidity sensor                               | BSD-3   | `esp32`, `esp8266` | Yes
-| **hts221**               | Driver for HTS221 temperature and humidity sensor.                               | ISC     | `esp32`            | Yes
-| **sht3x**                | Driver for Sensirion SHT30/SHT31/SHT35 digital temperature and humidity sensor   | BSD-3   | `esp32`, `esp8266` | Yes
-| **sht4x**                | Driver for Sensirion SHT40/SHT41/SHT45 digital temperature and humidity sensor   | BSD-3   | `esp32`, `esp8266` | Yes
-| **si7021**               | Driver for Si7013/Si7020/Si7021/HTU2xD/SHT2x and compatible temperature and humidity sensors | BSD-3   | `esp32`, `esp32c3`, `esp8266` | Yes
 
 ### Input device drivers
 
@@ -216,15 +90,6 @@ or [GitLab examples](https://gitlab.com/UncleRus/esp-idf-lib/tree/master/example
 | **ultrasonic**           | Driver for ultrasonic range meters, e.g. HC-SR04, HY-SRF05                       | BSD-3   | `esp32`, `esp8266` | No
 | **wiegand**              | Wiegand protocol receiver                                                        | BSD-3   | `esp32`, `esp8266` | No
 
-### Pressure sensors
-
-| Component                | Description                                                                      | License | Supported on       | Thread safety
-|--------------------------|----------------------------------------------------------------------------------|---------|--------------------|--------------
-| **bme680**               | Driver for BME680 digital environmental sensor                                   | BSD-3   | `esp32`, `esp8266` | Yes
-| **bmp180**               | Driver for BMP180 digital pressure sensor                                        | MIT     | `esp32`, `esp8266` | Yes
-| **bmp280**               | Driver for BMP280/BME280 digital pressure sensor                                 | MIT     | `esp32`, `esp8266` | Yes
-| **ms5611**               | Driver for barometic pressure sensor MS5611-01BA03                               | BSD-3   | `esp32`, `esp8266` | Yes
-
 ### Real-time clocks
 
 | Component                | Description                                                                      | License | Supported on       | Thread safety
@@ -259,9 +124,7 @@ or [GitLab examples](https://gitlab.com/UncleRus/esp-idf-lib/tree/master/example
 | **tsys01**               | Driver for precision digital temperature sensor TSYS01                           | BSD-3   | `esp32`, `esp8266` | Yes
 
 ## Library maintainers
-
-- [Ruslan V. Uss](https://github.com/UncleRus)
-- [Tomoyuki Sakurai](https://github.com/trombik)
+This fork of the library is not going to be maintained more than for what I need, but checkout the real UncleRus/esp-idf-lib for the true library
 
 ## Credits
 
